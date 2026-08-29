@@ -1,0 +1,102 @@
+@startuml architecture
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName Manrope, Segoe UI, Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #12203A
+skinparam ArrowColor #7C9AC5
+skinparam ArrowThickness 1.6
+skinparam ArrowFontSize 11
+skinparam ArrowFontColor #475569
+skinparam roundcorner 16
+skinparam nodesep 24
+skinparam ranksep 44
+skinparam legendBackgroundColor #FFFFFF
+skinparam legendBorderColor #DFE6F0
+skinparam legendFontSize 11
+
+' -- data / event nodes (neutral slate) --
+rectangle "POS / Billing" as POS_BILLING [[#POS_BILLING]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Supplier / Purchase Orders" as SUPPLIER_PO [[#SUPPLIER_PO]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "SKU Master" as SKU_MASTER [[#SKU_MASTER]] #F8FAFC;line:D7E0EB;text:334155
+
+rectangle "Retail Event Stream" as EVENT_STREAM [[#EVENT_STREAM]] #F8FAFC;line:D7E0EB;text:334155
+
+rectangle "Inventory Ledger" as INVENTORY_LEDGER [[#INVENTORY_LEDGER]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Sales History" as SALES_HISTORY [[#SALES_HISTORY]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Analytics Store" as ANALYTICS_STORE [[#ANALYTICS_STORE]] #F8FAFC;line:D7E0EB;text:334155
+
+' -- SKU digital twin (indigo) --
+rectangle "SKU Digital Twin\n<size:10>Store + SKU live state</size>" as SKU_DIGITAL_TWIN [[#SKU_DIGITAL_TWIN]] #ECE9FF;line:2D1FFF;text:0B2148
+
+' -- 3 specialist agents (blue) --
+rectangle "Sales Forecast\nAgent" as SALES_FORECAST_AGENT [[#SALES_FORECAST_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
+rectangle "Inventory Analysis\nAgent" as INVENTORY_AGENT [[#INVENTORY_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
+rectangle "Price Optimization\nAgent" as PRICE_AGENT [[#PRICE_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
+
+rectangle "Demand Forecast" as DEMAND_FORECAST [[#DEMAND_FORECAST]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Projected Inventory" as PROJECTED_INVENTORY [[#PROJECTED_INVENTORY]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Price Recommendation" as PRICE_RECOMMENDATION [[#PRICE_RECOMMENDATION]] #F8FAFC;line:D7E0EB;text:334155
+
+' -- decision engine (green) --
+rectangle "SKU Decision Engine" as DECISION_ENGINE [[#DECISION_ENGINE]] #E4F4EC;line:10B981;text:065F46
+
+' -- manager agent (deep navy, filled) --
+rectangle "Autonomous Store\nManager Agent" as MANAGER_AGENT [[#MANAGER_AGENT]] #113F99;line:143678;text:FFFFFF
+
+' -- business actions (orange) --
+rectangle "Replenish" as REPLENISH [[#REPLENISH]] #FFF3E6;line:FF6600;text:7C2D12
+rectangle "Price Action" as PRICE_ACTION [[#PRICE_ACTION]] #FFF3E6;line:FF6600;text:7C2D12
+rectangle "Store Task" as STORE_TASK [[#STORE_TASK]] #FFF3E6;line:FF6600;text:7C2D12
+
+' -- feedback loop (neutral slate) --
+rectangle "Actual Outcome" as ACTUAL_OUTCOME [[#ACTUAL_OUTCOME]] #F1F5F9;line:94A3B8;text:334155
+rectangle "AI Evaluation" as AI_EVALUATION [[#AI_EVALUATION]] #F1F5F9;line:94A3B8;text:334155
+
+POS_BILLING --> EVENT_STREAM
+SUPPLIER_PO --> EVENT_STREAM
+SKU_MASTER --> EVENT_STREAM
+
+EVENT_STREAM --> INVENTORY_LEDGER
+EVENT_STREAM --> SALES_HISTORY
+EVENT_STREAM --> ANALYTICS_STORE
+
+INVENTORY_LEDGER --> SKU_DIGITAL_TWIN
+SALES_HISTORY --> SKU_DIGITAL_TWIN
+ANALYTICS_STORE ..> SKU_DIGITAL_TWIN
+
+SKU_DIGITAL_TWIN --> SALES_FORECAST_AGENT
+SKU_DIGITAL_TWIN --> INVENTORY_AGENT
+SKU_DIGITAL_TWIN --> PRICE_AGENT
+
+SALES_FORECAST_AGENT --> DEMAND_FORECAST
+INVENTORY_AGENT --> PROJECTED_INVENTORY
+PRICE_AGENT --> PRICE_RECOMMENDATION
+
+DEMAND_FORECAST --> DECISION_ENGINE
+PROJECTED_INVENTORY --> DECISION_ENGINE
+PRICE_RECOMMENDATION --> DECISION_ENGINE
+
+DECISION_ENGINE --> MANAGER_AGENT
+
+MANAGER_AGENT --> REPLENISH
+MANAGER_AGENT --> PRICE_ACTION
+MANAGER_AGENT --> STORE_TASK
+
+REPLENISH --> ACTUAL_OUTCOME
+PRICE_ACTION --> ACTUAL_OUTCOME
+STORE_TASK --> ACTUAL_OUTCOME
+
+ACTUAL_OUTCOME --> AI_EVALUATION
+AI_EVALUATION .[#FF6600].> SKU_DIGITAL_TWIN : continuously improves
+
+legend right
+  |<back:#F8FAFC>    </back>| Data & events |
+  |<back:#E9EEFF>    </back>| Specialist AI agent |
+  |<back:#ECE9FF>    </back>| SKU Digital Twin |
+  |<back:#E4F4EC>    </back>| Decision engine |
+  |<back:#113F99>    </back>| Store Manager agent |
+  |<back:#FFF3E6>    </back>| Business action |
+endlegend
+
+@enduml
