@@ -626,6 +626,43 @@ body {
   cursor: pointer;
 }
 
+/* Raster diagram (ImageViewer). Collapsed, the viewport has NO fixed height —
+   it grows to the image, which renders at full container width so the whole
+   diagram is visible at rest with no zooming or expanding. Zoom/pan then works
+   from that 1:1 baseline. Expanded, the overlay supplies a real height and the
+   image is instead capped to the viewport so it still fits whole. */
+
+.image-viewer .diagram-canvas {
+  height: auto !important;
+  min-height: 0;
+}
+
+.image-viewer .diagram-canvas-content {
+  min-height: 0;
+}
+
+.diagram-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 18px;
+}
+
+.image-viewer.expanded .diagram-canvas {
+  height: 100% !important;
+}
+
+.image-viewer.expanded .diagram-canvas-content {
+  min-height: 100%;
+}
+
+/* 72px = the expanded overlay's 18px padding + the image's own 18px, doubled. */
+.image-viewer.expanded .diagram-image {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 72px);
+}
+
 .diagram-loading {
   padding: 60px;
   text-align: center;

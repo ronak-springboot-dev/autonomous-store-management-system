@@ -53,7 +53,7 @@ const SCENARIOS: ScenarioData[] = [
     action: {
       chips: ["Markdown 15%", "Pause Reorder"],
       detail:
-        "400 units on hand against ~12 units of forward demand. Markdown to accelerate sell-through and pause the next purchase order.",
+        "340 units on hand with another 60 inbound — a 400-unit position against ~12 units of forward demand, or over 160 days of cover. Markdown to accelerate sell-through and pause the next purchase order.",
     },
   },
   {
@@ -71,15 +71,15 @@ const SCENARIOS: ScenarioData[] = [
     ],
     stats: [
       { label: "Current Stock", value: "140" },
-      { label: "Incoming Stock", value: "50" },
+      { label: "Incoming Stock", value: "150" },
       { label: "Forecast Demand", value: "≈ 95" },
-      { label: "Projected Stock", value: "95", tone: "good" },
+      { label: "Projected Stock", value: "195", tone: "good" },
     ],
     risk: { label: "OPPORTUNITY", level: "opportunity" },
     action: {
       chips: ["Raise Price +8%", "Reduce Discount"],
       detail:
-        "Demand is climbing daily and stock coverage stays comfortable. A modest price increase captures margin without risking lost sales.",
+        "Demand is climbing daily, and inbound stock keeps about ten days of cover in place. A modest price increase captures margin without risking lost sales.",
     },
   },
 ];
