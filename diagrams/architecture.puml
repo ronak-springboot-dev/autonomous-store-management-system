@@ -19,17 +19,20 @@ skinparam legendFontSize 11
 rectangle "POS / Billing" as POS_BILLING [[#POS_BILLING]] #F8FAFC;line:D7E0EB;text:334155
 rectangle "Supplier / Purchase Orders" as SUPPLIER_PO [[#SUPPLIER_PO]] #F8FAFC;line:D7E0EB;text:334155
 rectangle "SKU Master" as SKU_MASTER [[#SKU_MASTER]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "Omnichannel Sales\n<size:10>E-commerce + marketplace (New)</size>" as OMNICHANNEL [[#OMNICHANNEL]] #F8FAFC;line:D7E0EB;line.dashed;text:334155
+rectangle "External Signals\n<size:10>Weather, events, competitor price (New)</size>" as EXTERNAL_SIGNALS [[#EXTERNAL_SIGNALS]] #F8FAFC;line:D7E0EB;line.dashed;text:334155
 
 rectangle "Retail Event Stream" as EVENT_STREAM [[#EVENT_STREAM]] #F8FAFC;line:D7E0EB;text:334155
 
 rectangle "Inventory Ledger" as INVENTORY_LEDGER [[#INVENTORY_LEDGER]] #F8FAFC;line:D7E0EB;text:334155
 rectangle "Sales History" as SALES_HISTORY [[#SALES_HISTORY]] #F8FAFC;line:D7E0EB;text:334155
-rectangle "Analytics Store" as ANALYTICS_STORE [[#ANALYTICS_STORE]] #F8FAFC;line:D7E0EB;text:334155
+rectangle "External Signals DB\n<size:10>(New)</size>" as EXTERNAL_SIGNALS_DB [[#EXTERNAL_SIGNALS_DB]] #F8FAFC;line:D7E0EB;line.dashed;text:334155
+rectangle "Analytics Store\n<size:10>Feature store</size>" as ANALYTICS_STORE [[#ANALYTICS_STORE]] #F8FAFC;line:D7E0EB;text:334155
 
 ' -- SKU digital twin (indigo) --
 rectangle "SKU Digital Twin\n<size:10>Store + SKU live state</size>" as SKU_DIGITAL_TWIN [[#SKU_DIGITAL_TWIN]] #ECE9FF;line:2D1FFF;text:0B2148
 
-' -- 3 specialist agents (blue) --
+' -- 3 existing specialist agents (blue) --
 rectangle "Sales Forecast\nAgent" as SALES_FORECAST_AGENT [[#SALES_FORECAST_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
 rectangle "Inventory Analysis\nAgent" as INVENTORY_AGENT [[#INVENTORY_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
 rectangle "Price Optimization\nAgent" as PRICE_AGENT [[#PRICE_AGENT]] #E9EEFF;line:1C69FF;text:0B2148
@@ -38,15 +41,29 @@ rectangle "Demand Forecast" as DEMAND_FORECAST [[#DEMAND_FORECAST]] #F8FAFC;line
 rectangle "Projected Inventory" as PROJECTED_INVENTORY [[#PROJECTED_INVENTORY]] #F8FAFC;line:D7E0EB;text:334155
 rectangle "Price Recommendation" as PRICE_RECOMMENDATION [[#PRICE_RECOMMENDATION]] #F8FAFC;line:D7E0EB;text:334155
 
-' -- decision engine (green) --
-rectangle "SKU Decision Engine" as DECISION_ENGINE [[#DECISION_ENGINE]] #E4F4EC;line:10B981;text:065F46
+' -- 4 new autonomous agents (blue, dashed = New) --
+rectangle "Replenishment\nAgent (New)" as REPLENISHMENT_AGENT [[#REPLENISHMENT_AGENT]] #E9EEFF;line:1C69FF;line.dashed;text:0B2148
+rectangle "Supplier Intelligence\nAgent (New)" as SUPPLIER_INTEL_AGENT [[#SUPPLIER_INTEL_AGENT]] #E9EEFF;line:1C69FF;line.dashed;text:0B2148
+rectangle "Store Transfer\nAgent (New)\n<size:10>Multi-store only</size>" as STORE_TRANSFER_AGENT [[#STORE_TRANSFER_AGENT]] #E9EEFF;line:1C69FF;line.dashed;text:0B2148
+rectangle "Promotion / Markdown\nAgent (New)" as PROMOTION_AGENT [[#PROMOTION_AGENT]] #E9EEFF;line:1C69FF;line.dashed;text:0B2148
+
+' -- decision & autonomy layer (green; new sub-engines dashed) --
+rectangle "SKU Decision Engine\n<size:10>Policy orchestration</size>" as DECISION_ENGINE [[#DECISION_ENGINE]] #E4F4EC;line:10B981;text:065F46
+rectangle "Risk Engine (New)" as RISK_ENGINE [[#RISK_ENGINE]] #E4F4EC;line:10B981;line.dashed;text:065F46
+rectangle "Policy Engine (New)" as POLICY_ENGINE [[#POLICY_ENGINE]] #E4F4EC;line:10B981;line.dashed;text:065F46
+rectangle "Explainability\nEngine (New)" as EXPLAINABILITY_ENGINE [[#EXPLAINABILITY_ENGINE]] #E4F4EC;line:10B981;line.dashed;text:065F46
 
 ' -- manager agent (deep navy, filled) --
-rectangle "Autonomous Store\nManager Agent" as MANAGER_AGENT [[#MANAGER_AGENT]] #113F99;line:143678;text:FFFFFF
+rectangle "Autonomous Store\nManager Agent\n<size:10>Sets autonomy level L1-L4</size>" as MANAGER_AGENT [[#MANAGER_AGENT]] #113F99;line:143678;text:FFFFFF
 
-' -- business actions (orange) --
-rectangle "Replenish" as REPLENISH [[#REPLENISH]] #FFF3E6;line:FF6600;text:7C2D12
-rectangle "Price Action" as PRICE_ACTION [[#PRICE_ACTION]] #FFF3E6;line:FF6600;text:7C2D12
+' -- human in the loop (purple) --
+rectangle "Human-in-the-Loop\n<size:10>Review · approve · override</size>" as HUMAN_IN_LOOP [[#HUMAN_IN_LOOP]] #F1EAFE;line:7C3AED;text:4C1D95
+
+' -- business actions / execution layer (orange; new actions dashed) --
+rectangle "Replenish\n<size:10>Purchase orders</size>" as REPLENISH [[#REPLENISH]] #FFF3E6;line:FF6600;text:7C2D12
+rectangle "Price Action\n<size:10>Pricing engine</size>" as PRICE_ACTION [[#PRICE_ACTION]] #FFF3E6;line:FF6600;text:7C2D12
+rectangle "Store Transfer (New)" as STORE_TRANSFER_ACTION [[#STORE_TRANSFER_ACTION]] #FFF3E6;line:FF6600;line.dashed;text:7C2D12
+rectangle "Promotion (New)" as PROMOTION_ACTION [[#PROMOTION_ACTION]] #FFF3E6;line:FF6600;line.dashed;text:7C2D12
 rectangle "Store Task" as STORE_TASK [[#STORE_TASK]] #FFF3E6;line:FF6600;text:7C2D12
 
 ' -- feedback loop (neutral slate) --
@@ -56,13 +73,17 @@ rectangle "AI Evaluation" as AI_EVALUATION [[#AI_EVALUATION]] #F1F5F9;line:94A3B
 POS_BILLING --> EVENT_STREAM
 SUPPLIER_PO --> EVENT_STREAM
 SKU_MASTER --> EVENT_STREAM
+OMNICHANNEL --> EVENT_STREAM
+EXTERNAL_SIGNALS --> EVENT_STREAM
 
 EVENT_STREAM --> INVENTORY_LEDGER
 EVENT_STREAM --> SALES_HISTORY
+EVENT_STREAM --> EXTERNAL_SIGNALS_DB
 EVENT_STREAM --> ANALYTICS_STORE
 
 INVENTORY_LEDGER --> SKU_DIGITAL_TWIN
 SALES_HISTORY --> SKU_DIGITAL_TWIN
+EXTERNAL_SIGNALS_DB ..> SKU_DIGITAL_TWIN
 ANALYTICS_STORE ..> SKU_DIGITAL_TWIN
 
 SKU_DIGITAL_TWIN --> SALES_FORECAST_AGENT
@@ -73,18 +94,38 @@ SALES_FORECAST_AGENT --> DEMAND_FORECAST
 INVENTORY_AGENT --> PROJECTED_INVENTORY
 PRICE_AGENT --> PRICE_RECOMMENDATION
 
+DEMAND_FORECAST --> REPLENISHMENT_AGENT
+PROJECTED_INVENTORY --> REPLENISHMENT_AGENT
+REPLENISHMENT_AGENT --> SUPPLIER_INTEL_AGENT
+PROJECTED_INVENTORY --> STORE_TRANSFER_AGENT
+DEMAND_FORECAST --> PROMOTION_AGENT
+PRICE_RECOMMENDATION --> PROMOTION_AGENT
+
 DEMAND_FORECAST --> DECISION_ENGINE
 PROJECTED_INVENTORY --> DECISION_ENGINE
 PRICE_RECOMMENDATION --> DECISION_ENGINE
+REPLENISHMENT_AGENT --> DECISION_ENGINE
+SUPPLIER_INTEL_AGENT --> DECISION_ENGINE
+STORE_TRANSFER_AGENT --> DECISION_ENGINE
+PROMOTION_AGENT --> DECISION_ENGINE
 
-DECISION_ENGINE --> MANAGER_AGENT
+DECISION_ENGINE --> RISK_ENGINE
+RISK_ENGINE --> POLICY_ENGINE
+POLICY_ENGINE --> EXPLAINABILITY_ENGINE
+EXPLAINABILITY_ENGINE --> MANAGER_AGENT
+
+MANAGER_AGENT <.[#7C3AED].> HUMAN_IN_LOOP
 
 MANAGER_AGENT --> REPLENISH
 MANAGER_AGENT --> PRICE_ACTION
+MANAGER_AGENT --> STORE_TRANSFER_ACTION
+MANAGER_AGENT --> PROMOTION_ACTION
 MANAGER_AGENT --> STORE_TASK
 
 REPLENISH --> ACTUAL_OUTCOME
 PRICE_ACTION --> ACTUAL_OUTCOME
+STORE_TRANSFER_ACTION --> ACTUAL_OUTCOME
+PROMOTION_ACTION --> ACTUAL_OUTCOME
 STORE_TASK --> ACTUAL_OUTCOME
 
 ACTUAL_OUTCOME --> AI_EVALUATION
@@ -96,7 +137,9 @@ legend right
   |<back:#ECE9FF>    </back>| SKU Digital Twin |
   |<back:#E4F4EC>    </back>| Decision engine |
   |<back:#113F99>    </back>| Store Manager agent |
+  |<back:#F1EAFE>    </back>| Human-in-the-loop |
   |<back:#FFF3E6>    </back>| Business action |
+  | ╌╌╌╌ | New addition |
 endlegend
 
 @enduml

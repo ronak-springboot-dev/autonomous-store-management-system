@@ -10,8 +10,8 @@ export type PageId =
 const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: "problem", label: "01 · Problem Statement" },
   { id: "overview", label: "02 · Executive Overview" },
-  { id: "architecture", label: "03 · Architecture & Flow" },
-  { id: "requirements", label: "04 · Functional Requirements" },
+  { id: "requirements", label: "03 · Functional Requirements" },
+  { id: "architecture", label: "04 · Architecture & Flow" },
   { id: "agents", label: "05 · AI Intelligence" },
   { id: "scenario", label: "06 · Business Scenario" },
   { id: "usp", label: "07 · Strategic Differentiation" },

@@ -5,9 +5,12 @@ export type ArchNodeKey =
   | "POS_BILLING"
   | "SUPPLIER_PO"
   | "SKU_MASTER"
+  | "OMNICHANNEL"
+  | "EXTERNAL_SIGNALS"
   | "EVENT_STREAM"
   | "INVENTORY_LEDGER"
   | "SALES_HISTORY"
+  | "EXTERNAL_SIGNALS_DB"
   | "ANALYTICS_STORE"
   | "SKU_DIGITAL_TWIN"
   | "SALES_FORECAST_AGENT"
@@ -16,10 +19,20 @@ export type ArchNodeKey =
   | "DEMAND_FORECAST"
   | "PROJECTED_INVENTORY"
   | "PRICE_RECOMMENDATION"
+  | "REPLENISHMENT_AGENT"
+  | "SUPPLIER_INTEL_AGENT"
+  | "STORE_TRANSFER_AGENT"
+  | "PROMOTION_AGENT"
   | "DECISION_ENGINE"
+  | "RISK_ENGINE"
+  | "POLICY_ENGINE"
+  | "EXPLAINABILITY_ENGINE"
   | "MANAGER_AGENT"
+  | "HUMAN_IN_LOOP"
   | "REPLENISH"
   | "PRICE_ACTION"
+  | "STORE_TRANSFER_ACTION"
+  | "PROMOTION_ACTION"
   | "STORE_TASK"
   | "ACTUAL_OUTCOME"
   | "AI_EVALUATION";
@@ -45,6 +58,16 @@ export const architectureDescriptions: Record<ArchNodeKey, { title: string; desc
     description:
       "Provides the common product identity used throughout the platform. SKU, product, category, brand and variants such as size allow every AI decision to remain anchored to a specific retail item.",
   },
+  OMNICHANNEL: {
+    title: "Omnichannel Sales",
+    description:
+      "Captures demand from e-commerce and marketplace channels alongside in-store billing, so forecasts and inventory decisions reflect every way a customer can buy the SKU, not just walk-in traffic.",
+  },
+  EXTERNAL_SIGNALS: {
+    title: "External Signals",
+    description:
+      "Brings outside context into the platform: weather, festivals and holidays, local events and competitor pricing. These signals help explain demand spikes and dips that internal sales data alone cannot.",
+  },
   EVENT_STREAM: {
     title: "Retail Event Stream",
     description:
@@ -59,6 +82,11 @@ export const architectureDescriptions: Record<ArchNodeKey, { title: string; desc
     title: "Sales History",
     description:
       "Maintains historical SKU-level billing activity. This provides the demand intelligence layer with the sales velocity and historical patterns required to estimate future demand.",
+  },
+  EXTERNAL_SIGNALS_DB: {
+    title: "External Signals DB",
+    description:
+      "Stores weather, calendar and competitor signals alongside the store's own operational data, keyed to the same SKU and store context so the Digital Twin can reason about internal and external drivers together.",
   },
   ANALYTICS_STORE: {
     title: "Analytics Store",
@@ -100,25 +128,75 @@ export const architectureDescriptions: Record<ArchNodeKey, { title: string; desc
     description:
       "Provides a commercial pricing signal based on demand and inventory conditions. It allows pricing decisions to be considered alongside replenishment and stock risk rather than independently.",
   },
+  REPLENISHMENT_AGENT: {
+    title: "Replenishment Agent",
+    description:
+      "Calculates the reorder quantity and timing for a SKU by combining the demand forecast with the projected inventory position, turning stockout risk into a concrete purchase recommendation.",
+  },
+  SUPPLIER_INTEL_AGENT: {
+    title: "Supplier Intelligence Agent",
+    description:
+      "Scores available suppliers on lead time, reliability and cost, and recommends the best sourcing option for a replenishment order rather than defaulting to a single fixed supplier.",
+  },
+  STORE_TRANSFER_AGENT: {
+    title: "Store Transfer Agent",
+    description:
+      "For multi-store operations, identifies opportunities to move stock from a store with excess inventory to one facing a stockout, reducing the need for a new purchase order.",
+  },
+  PROMOTION_AGENT: {
+    title: "Promotion / Markdown Agent",
+    description:
+      "Looks at demand and pricing signals to recommend promotions and markdowns, for example clearing aging or overstocked inventory before it reaches shelf-life expiry.",
+  },
   DECISION_ENGINE: {
     title: "SKU Decision Engine",
     description:
-      "Combines the outputs of the three specialist AI agents. It determines the overall SKU situation, including stockout risk, overstock risk, replenishment requirements and pricing opportunities.",
+      "Aggregates the recommendations from every specialist and autonomous agent and evaluates the trade-offs between them, forming the overall SKU situation before risk and policy checks are applied.",
+  },
+  RISK_ENGINE: {
+    title: "Risk Engine",
+    description:
+      "Evaluates the risk profile of the aggregated recommendation across stockout, overstock, revenue, expiry, supplier and pricing dimensions before it is allowed to progress toward an action.",
+  },
+  POLICY_ENGINE: {
+    title: "Policy Engine",
+    description:
+      "Applies business policies, constraints and guardrails, such as budget limits, minimum margins or supplier agreements, ensuring every recommendation respects the rules the business has set.",
+  },
+  EXPLAINABILITY_ENGINE: {
+    title: "Explainability Engine",
+    description:
+      "Produces a plain-language rationale for each candidate action: why it is being suggested, its expected impact, the model's confidence and what the alternative options were.",
   },
   MANAGER_AGENT: {
     title: "Autonomous Store Manager Agent",
     description:
-      "Acts as the final decision-making layer. It prioritizes business conditions, reasons across the available intelligence and determines the next-best action. Depending on governance rules, the action can be recommended to a manager or executed automatically.",
+      "Acts as the final decision-making layer. It prioritizes business conditions, reasons across the available intelligence and determines the next-best action and the autonomy level (Observe, Recommend, Auto Execute or Fully Autonomous) at which it should run.",
+  },
+  HUMAN_IN_LOOP: {
+    title: "Human-in-the-Loop",
+    description:
+      "Gives store managers the ability to review, approve, modify or override an AI-driven action before or after it executes, keeping human oversight in place wherever the configured autonomy level requires it.",
   },
   REPLENISH: {
-    title: "Replenishment Action",
+    title: "Replenish (Purchase Orders)",
     description:
-      "Represents the action taken when forecast demand indicates insufficient inventory. The system can recommend or initiate replenishment according to configured business rules and approval policies.",
+      "Represents the action taken when forecast demand indicates insufficient inventory. The system can recommend or initiate a purchase order according to configured business rules and approval policies.",
   },
   PRICE_ACTION: {
-    title: "Price Action",
+    title: "Price Action (Pricing Engine)",
     description:
       "Represents the commercial action resulting from the pricing intelligence and overall SKU decision. This can include a price change or promotion recommendation.",
+  },
+  STORE_TRANSFER_ACTION: {
+    title: "Store Transfer",
+    description:
+      "Initiates or recommends moving inventory between stores based on the Store Transfer Agent's assessment, rebalancing stock across a multi-store network instead of ordering new inventory.",
+  },
+  PROMOTION_ACTION: {
+    title: "Promotion (Promotion Engine)",
+    description:
+      "Launches or recommends a promotion or markdown campaign identified by the Promotion / Markdown Agent, converting a pricing opportunity into a customer-facing offer.",
   },
   STORE_TASK: {
     title: "Store Task",
