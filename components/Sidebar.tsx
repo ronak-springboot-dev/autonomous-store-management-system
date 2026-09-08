@@ -1,6 +1,8 @@
 export type PageId =
   | "problem"
   | "overview"
+  | "marketFit"
+  | "homeDepotFit"
   | "architecture"
   | "requirements"
   | "agents"
@@ -10,11 +12,13 @@ export type PageId =
 const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: "problem", label: "01 · Problem Statement" },
   { id: "overview", label: "02 · Executive Overview" },
-  { id: "requirements", label: "03 · Functional Requirements" },
-  { id: "architecture", label: "04 · Architecture & Flow" },
-  { id: "agents", label: "05 · AI Intelligence" },
-  { id: "scenario", label: "06 · Business Scenario" },
-  { id: "usp", label: "07 · Strategic Differentiation" },
+  { id: "marketFit", label: "03 · Customer Fit & Market" },
+  { id: "homeDepotFit", label: "04 · Home Depot Business Fit" },
+  { id: "architecture", label: "05 · Architecture & Flow" },
+  { id: "requirements", label: "06 · Functional Requirements" },
+  { id: "agents", label: "07 · AI Intelligence" },
+  { id: "scenario", label: "08 · Business Scenario" },
+  { id: "usp", label: "09 · Strategic Differentiation" },
 ];
 
 export function Sidebar({

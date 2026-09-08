@@ -8,6 +8,8 @@ import { ArchNodeKey } from "@/lib/architectureData";
 
 import { ProblemStatementPage } from "@/components/pages/ProblemStatementPage";
 import { OverviewPage } from "@/components/pages/OverviewPage";
+import { MarketFitPage } from "@/components/pages/MarketFitPage";
+import { HomeDepotFitPage } from "@/components/pages/HomeDepotFitPage";
 import { ArchitecturePage } from "@/components/pages/ArchitecturePage";
 import { FunctionalRequirementsPage } from "@/components/pages/FunctionalRequirementsPage";
 import { AgentsPage } from "@/components/pages/AgentsPage";
@@ -35,6 +37,8 @@ export default function Home() {
         <div className="content">
           {activePage === "problem" && <ProblemStatementPage />}
           {activePage === "overview" && <OverviewPage />}
+          {activePage === "marketFit" && <MarketFitPage />}
+          {activePage === "homeDepotFit" && <HomeDepotFitPage />}
           {activePage === "architecture" && (
             <ArchitecturePage onNodeClick={setActiveModalKey} />
           )}

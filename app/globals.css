@@ -1149,6 +1149,135 @@ body {
   line-height: 1.65;
 }
 
+/* ACCENT-BORDER CARD MODIFIERS (highlighted comparison cards) */
+
+.card-accent-green {
+  border: 2px solid var(--green);
+  background: #f7fefb;
+}
+
+.card-accent-orange {
+  border: 2px solid var(--brand-orange);
+  background: #fffaf6;
+}
+
+/* CONSOLE BOX — dark monospace diagram block (Home Depot page) */
+
+.console-box {
+  background: linear-gradient(125deg, var(--brand-navy-2), var(--brand-navy-1));
+  color: #dbe5f5;
+  border-radius: 18px;
+  padding: 28px 30px;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.console-box pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font: 500 14px/1.8 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.console-box .accent {
+  color: var(--brand-sky);
+  font-weight: 700;
+}
+
+/* PULL QUOTE — light callout, standalone (not nested in a hero) */
+
+.pull-quote {
+  background: linear-gradient(135deg, #eff6ff, #fff);
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  padding: 30px 34px;
+  box-shadow: var(--shadow);
+}
+
+.pull-quote p {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.35;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.pull-quote .accent {
+  color: var(--blue);
+}
+
+/* PILL BADGE — generic colored pill (fit badges, matrix cell markers) */
+
+.pill-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.pill-badge.good {
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.pill-badge.adapt {
+  color: #7c2d12;
+  background: #ffedd5;
+}
+
+.pill-badge.na {
+  color: var(--muted);
+  background: #f1f5f9;
+}
+
+/* CUSTOMER FIT CARD (Market Fit page) */
+
+.usecase-row {
+  padding: 13px 15px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.usecase-row strong {
+  display: block;
+  color: var(--blue);
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.usecase-row span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.customer-pitch {
+  margin-top: 18px;
+  padding: 15px 17px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 11px;
+  color: #1e3a5f;
+  font-size: 13px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.customer-pitch::before {
+  content: "Customer Pitch";
+  display: block;
+  color: var(--blue);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 1150px) {
